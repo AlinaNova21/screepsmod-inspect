@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Inspector</title>
+</head>
+<body>
+	<a href="/api/auth/steam" target="_blank">
+		<img src="sits_01.png">
+	</a>
+	<div style="display:none">
+		After logging in, copy/paste this URL to the address bar
+		<input type="text" id="out" readonly>
+	</div>
+	<script>
+		window.addEventListener('message', (e) => {
+        	const { token } = JSON.parse(e.data)
+        	const ws = `server1.screepspl.us/inspector/socket/${token}`
+        	// const uri = `chrome-devtools://devtools/bundled/inspector.html?experiments=true&v8only=true&ws=${ws}`;
+        	const uri = `js_app.html?experiments=true&v8only=true&wss=${ws}`;
+        	out.value = uri
+        	location.href = uri        	
+        })
+	</script>
+</body>
+</html>
